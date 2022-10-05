@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 import time
 import nltk
 
-
+global topWord
 def showTop(word):
 
     options = Options()
@@ -12,7 +12,7 @@ def showTop(word):
     options.add_argument('--headless')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--remote-debugging-port=9222")
-    
+
     try:
         global topWord
 
@@ -64,7 +64,6 @@ def showTop(word):
     except Exception as ex:
         print(ex)
 
-    driver.quit()
-
+    #driver.quit()
 
     return topWord
