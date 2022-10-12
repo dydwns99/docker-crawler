@@ -4,6 +4,7 @@ ENV PYTHONUNBUFFERED 1
 
 RUN apt-get -y update 
 RUN apt-get -y install vim # docker 안에서 vi 설치 안해도됨
+Run apt-get install sudo
 
 RUN mkdir /srv/docker-server # docker안에 srv/docker-server 폴더 생성
 ADD . /srv/docker-server 
@@ -26,8 +27,9 @@ Run google-chrome --version
 # Chrome driver 설치
 RUN wget -N http://chromedriver.storage.googleapis.com/106.0.5249.61/chromedriver_linux64.zip -P /srv/docker-server
 Run unzip /srv/docker-server/chromedriver_linux64.zip
+Run sudo mv chromedriver /usr/bin/chromedriver
 
-RUN /srv/docker-server/chromedriver
+CMD ["chromedriver"]
 
-EXPOSE 9515
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:9515"]
+EXPOSE 8000
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]

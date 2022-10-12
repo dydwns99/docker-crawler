@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 import time
 import nltk
 
-global topWord
 def showTop(word):
 
     options = Options()
@@ -14,11 +13,10 @@ def showTop(word):
     options.add_argument("--remote-debugging-port=9222")
 
     try:
-        global topWord
 
         driver = webdriver.Chrome(options=options)
         driver.get("https://www.instagram.com")
-        time.sleep(2)
+        time.sleep(3)
         #id.pwd 입력
         _id = driver.find_element(By.NAME,"username")
         _id.send_keys("mao.wncloset")
@@ -27,20 +25,24 @@ def showTop(word):
         _pwd.send_keys("Mmqwer1234!!")
         time.sleep(2)
         #각 버튼 클릭
-        driver.find_element(By.CLASS_NAME, 'sqdOP.L3NKy.y3zKF').click()
-        time.sleep(5)
+        a = driver.find_element(By.CLASS_NAME, 'sqdOP.L3NKy.y3zKF')
+        time.sleep(1)
+        a.click()
+        time.sleep(10)
         #키워드 검색하기
         driver.get('https://www.instagram.com/explore/tags/' + word + '/')
         time.sleep(5)
         #첫번째 게시물 열기
-        driver.find_element(By.CLASS_NAME, '_aabd._aa8k._aanf').click()
+        b = driver.find_element(By.CLASS_NAME, '_aabd._aa8k._aanf')
+        time.sleep(1)
+        b.click()
         time.sleep(5)
         #여러 게시물에서 해시태그 크롤링
         results = []
-        count = 1
+        count = 15
         for i in range(count):
             data = driver.find_elements(By.CSS_SELECTOR, 'span._aacl._aaco._aacu._aacx._aad7._aade > a')
-            time.sleep(3)
+            time.sleep(6)
             # '#'제거
             for j in range(len(data)):
                 results.append(data[j].text.replace("#", ""))
@@ -56,14 +58,14 @@ def showTop(word):
         #text에 저장하고
         text = nltk.Text(tokens)
         #가장 많이 등장하는 5개의 단어를 추려낸다.
-        topWord = text.vocab().most_common(5)
+        topword = text.vocab().most_common(5)
 
         assert s.is_displayed() is True
         print("ok\n")
-        print(topWord)
+        print(topword)
     except Exception as ex:
         print(ex)
 
     #driver.quit()
 
-    return topWord
+    return topword

@@ -5,7 +5,7 @@ from .showtop import showTop
 
 # Create your views here.
 def showTopHashtag(request):
-    word = "apple"
+    word = "사과"
     data = {
         "Topword" : showTop(word)
     }
