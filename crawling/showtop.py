@@ -7,7 +7,7 @@ import nltk
 def showTop(word):
 
     # 1. 웹페이지 열기
-    driver = webdriver.Chrome("chromedriver_win32/chromedriver.exe")
+    driver = webdriver.Chrome("chromedriver.exe")
     driver.get("https://www.instagram.com/accounts/login/")
     time.sleep(2)
 
