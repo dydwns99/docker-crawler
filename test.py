@@ -15,9 +15,9 @@ options.add_argument("--remote-debugging-port=9222")
 try:
   driver = webdriver.Chrome(options=options)
   driver.get("https://www.instagram.com")
-  time.sleep(2)
+  time.sleep(3)
   #id.pwd 입력
-  _id = driver.find_element(By.NAME,"username")
+  _id = driver.find_element(By.NAME,'username')
   _id.send_keys("mao.wncloset")
   time.sleep(2)
   _pwd = driver.find_element(By.NAME, 'password')
@@ -25,19 +25,21 @@ try:
   time.sleep(2)
   #각 버튼 클릭
   driver.find_element(By.CLASS_NAME, 'sqdOP.L3NKy.y3zKF').click()
-  time.sleep(5)
+  time.sleep(10)
   #키워드 검색하기
-  driver.get('https://www.instagram.com/explore/tags/' + '사과' + '/')
-  time.sleep(5)
+  driver.get("https://www.instagram.com/explore/tags/" + "사과" + "/")
+  time.sleep(7)
   #첫번째 게시물 열기
-  driver.find_element(By.CLASS_NAME, '_aabd._aa8k._aanf').click()
+  b = driver.find_element(By.CLASS_NAME, '_aabd._aa8k._aanf')
+  time.sleep(1)
+  b.click()
   time.sleep(5)
   #여러 게시물에서 해시태그 크롤링
   results = []
-  count = 1
+  count = 3
   for i in range(count):
       data = driver.find_elements(By.CSS_SELECTOR, 'span._aacl._aaco._aacu._aacx._aad7._aade > a')
-      time.sleep(3)
+      time.sleep(6)
       # '#'제거
       for j in range(len(data)):
           results.append(data[j].text.replace("#", ""))
